@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Boarding pass · Lanzarote</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,700;1,9..144,500&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="bubbles" id="bubbles" aria-hidden="true"></div>
+
+  <main>
+    <!-- screen 1 -->
+    <section class="screen is-active" data-screen="invite">
+      <h1>X, your flight is ready.</h1>
+      <p class="lead">One seat, one island, and someone who would like to take you there.</p>
+      <div class="actions">
+        <button class="btn btn-yes" id="yesBtn">Show me the ticket</button>
+        <button class="btn btn-no" id="noBtn">No thanks</button>
+      </div>
+      <p class="hint" id="noHint" hidden></p>
+    </section>
+
+    <!-- screen 2 -->
+    <section class="screen" data-screen="ticket">
+      <article class="ticket">
+        <div class="ticket-main">
+          <header class="ticket-head">
+            <span class="airline">Universe Airlines</span>
+            <span class="class">Boarding pass</span>
+          </header>
+
+          <div class="route">
+            <div class="city">
+              <strong>OTP</strong>
+              <span>Bucharest</span>
+            </div>
+            <div class="path" aria-hidden="true">
+              <span class="line"></span>
+              <span class="plane">✈</span>
+              <span class="line"></span>
+            </div>
+            <div class="city right">
+              <strong>ACE</strong>
+              <span>Lanzarote</span>
+            </div>
+          </div>
+
+          <dl class="grid">
+            <div><dt>Passenger</dt><dd>X</dd></div>
+            <div><dt>Age</dt><dd>29</dd></div>
+            <div><dt>Home base</dt><dd>Bucharest</dd></div>
+            <div><dt>Interests</dt><dd>Wine &amp; dogs</dd></div>
+            <div class="wide"><dt>Looking for</dt><dd>A long-term relationship, a life partner</dd></div>
+            <div><dt>Seat</dt><dd>2A</dd></div>
+            <div><dt>Date</dt><dd>Soon</dd></div>
+          </dl>
+
+          <blockquote class="theory">
+            <span>A conspiracy theory I believe in</span>
+            The universe is always conspiring in my favor.
+          </blockquote>
+        </div>
+
+        <aside class="ticket-stub">
+          <div class="barcode" aria-hidden="true"></div>
+          <button class="btn btn-yes" id="continueBtn">Continue</button>
+        </aside>
+      </article>
+      <p class="hint" id="boardingMsg" hidden>Boarding…</p>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

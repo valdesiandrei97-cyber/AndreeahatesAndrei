@@ -1,0 +1,153 @@
+:root {
+  --wine: #4a1226;
+  --wine-deep: #2a0a17;
+  --atlantic: #1f6f78;
+  --sky: #f3a58a;
+  --paper: #fbf8f4;
+  --ink: #2b1a20;
+  --muted: #8a7078;
+  --serif: 'Fraunces', Georgia, serif;
+  --sans: 'DM Sans', system-ui, sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+html, body { height: 100%; margin: 0; }
+
+body {
+  font-family: var(--sans);
+  color: var(--paper);
+  background: linear-gradient(170deg, var(--wine-deep) 0%, var(--wine) 45%, var(--atlantic) 130%);
+  overflow-x: hidden;
+}
+
+main {
+  position: relative;
+  z-index: 1;
+  min-height: 100%;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+}
+
+.screen { display: none; width: 100%; max-width: 860px; text-align: center; }
+.screen.is-active { display: block; animation: rise .5s ease both; }
+
+@keyframes rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+
+h1 {
+  font-family: var(--serif);
+  font-weight: 700;
+  font-size: clamp(2.2rem, 7vw, 4.2rem);
+  line-height: 1.05;
+  margin: 0 0 16px;
+}
+
+.lead { font-size: 1.15rem; max-width: 34ch; margin: 0 auto 36px; opacity: .85; line-height: 1.5; }
+
+.actions { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+
+.btn {
+  font: 700 1rem var(--sans);
+  border: 0;
+  border-radius: 999px;
+  padding: 14px 28px;
+  cursor: pointer;
+  transition: transform .15s ease, background .2s ease;
+}
+.btn:focus-visible { outline: 3px solid var(--sky); outline-offset: 3px; }
+.btn-yes { background: var(--sky); color: var(--wine-deep); }
+.btn-yes:hover { transform: translateY(-2px); }
+.btn-no { background: transparent; color: var(--paper); border: 1.5px solid rgba(255,255,255,.4); transition: left .25s ease, top .25s ease; }
+
+.hint { margin-top: 22px; font-style: italic; opacity: .8; }
+
+/* ticket */
+.ticket {
+  display: grid;
+  grid-template-columns: 1fr 190px;
+  background: var(--paper);
+  color: var(--ink);
+  border-radius: 20px;
+  text-align: left;
+  overflow: hidden;
+  box-shadow: 0 30px 60px rgba(0,0,0,.4);
+}
+
+.ticket-main { padding: 28px 32px; }
+
+.ticket-head { display: flex; justify-content: space-between; font-size: .85rem; color: var(--muted); margin-bottom: 22px; }
+.airline { font-weight: 700; color: var(--wine); }
+
+.route { display: flex; align-items: center; gap: 14px; margin-bottom: 26px; }
+.city strong { display: block; font-family: var(--serif); font-size: clamp(2.4rem, 8vw, 3.6rem); line-height: 1; color: var(--wine); }
+.city span { color: var(--muted); font-size: .9rem; }
+.city.right { text-align: right; }
+.path { flex: 1; display: flex; align-items: center; gap: 8px; color: var(--atlantic); }
+.path .line { flex: 1; border-top: 2px dashed currentColor; opacity: .5; }
+.plane { font-size: 1.4rem; animation: fly 3s ease-in-out infinite; }
+@keyframes fly { 50% { transform: translateX(8px) translateY(-3px); } }
+
+.grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px 20px; margin: 0 0 24px; }
+.grid .wide { grid-column: 1 / -1; }
+.grid dt { font-size: .78rem; color: var(--muted); margin-bottom: 2px; }
+.grid dd { margin: 0; font-weight: 700; font-size: 1.02rem; }
+
+.theory {
+  margin: 0;
+  padding: 14px 18px;
+  border-left: 4px solid var(--sky);
+  background: #f4ebe6;
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 1.15rem;
+  line-height: 1.4;
+}
+.theory span { display: block; font: 500 .78rem var(--sans); font-style: normal; color: var(--muted); margin-bottom: 4px; }
+
+.ticket-stub {
+  border-left: 2px dashed #d9ccc5;
+  padding: 28px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+  background: #f4ebe6;
+}
+
+.barcode {
+  width: 100%;
+  flex: 1;
+  min-height: 120px;
+  background: repeating-linear-gradient(90deg, var(--ink) 0 2px, transparent 2px 5px, var(--ink) 5px 6px, transparent 6px 10px, var(--ink) 10px 13px, transparent 13px 16px);
+  opacity: .85;
+  border-radius: 4px;
+}
+
+.ticket-stub .btn { width: 100%; }
+
+/* bubbles */
+.bubbles { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+.bubble {
+  position: absolute;
+  bottom: -20px;
+  left: var(--x);
+  width: var(--size);
+  height: var(--size);
+  border-radius: 50%;
+  background: rgba(255,255,255,.25);
+  animation: float var(--dur) linear var(--delay) infinite;
+}
+@keyframes float { to { transform: translate(var(--drift), -110vh); opacity: 0; } }
+
+@media (max-width: 680px) {
+  .ticket { grid-template-columns: 1fr; }
+  .ticket-stub { border-left: 0; border-top: 2px dashed #d9ccc5; flex-direction: column; }
+  .barcode { min-height: 60px; flex: none; height: 60px; }
+  .grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bubble, .plane, .screen.is-active { animation: none; }
+}
